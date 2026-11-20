@@ -1,14 +1,5 @@
 services:
-  backend:
-    build: ./backend
+  redis:
+    image: redis
     ports:
-      - 5000:3000
-    environment:
-      - PORT=3000
-  
-  backend2:
-    build: ./backend2
-    ports:
-      - 8000:8000
-    environment:
-      - PORT=8000
+      - :
