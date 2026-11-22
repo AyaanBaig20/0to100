@@ -5,6 +5,8 @@ import cookieParser from "cookie-parser";
 import cors from "cors"
 import authRouter from "./routes/auth.routes.js"
 import userModel from "./model/user.model.js";
+import {sendEmail} from "./utilis/sendEmail.js";
+import emailQueue from "./queue.js";
 
 let app = express();
 const redis =new Redis(process.env.REDIS_URL) 
@@ -55,4 +57,10 @@ app.post("/verify-otp",async(req,res)=>{
     redis.del(`otp:${email}`)
     return res.json({message:"opt match"})
   }
+})
+
+app.post("/email",async(req,res)=>{
+  let {email} = req.body
+  await emailQueue.add("send-email",{email})
+  return res.json({message:"login completed"})
 })
