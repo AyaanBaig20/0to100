@@ -1,5 +1,27 @@
+
 services:
-  redis:
-    image: redis
+  nginx:
+    image: nginx:alpine
     ports:
-      - 
+      - "8000:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+
+  server1:
+    build: ./backend2
+    environment:
+      - PORT=3000
+    ports:
+      - 3000:3000
+
+  server2:
+    build: ./backend2
+    environment:
+      - PORT=4000
+    ports:
+      - 4000:4000
+
+  # redis:
+  #   image: redis
+  #   ports:
+  #     - 

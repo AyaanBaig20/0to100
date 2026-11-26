@@ -8,5 +8,5 @@ app.listen(PORT,()=>{
     console.log(`server is running on port ${PORT}`);
 })
 app.get("/",(req,res)=>{
-    res.send("checkup route 2")
+    res.send(`checkup route ${PORT}`)
 })
